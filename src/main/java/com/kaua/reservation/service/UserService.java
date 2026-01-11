@@ -1,6 +1,7 @@
 package com.kaua.reservation.service;
 
 
+import com.kaua.reservation.auth.AuthVerifyService;
 import com.kaua.reservation.config.TokenConfig;
 import com.kaua.reservation.dto.request.LoginRequest;
 import com.kaua.reservation.dto.request.RegisterRequest;
@@ -17,12 +18,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService extends AuthVerifyService{
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenConfig tokenConfig;
+
+
 
     public UserService(UserRepository repository, BCryptPasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenConfig tokenConfig) {
         this.userRepository = repository;
@@ -71,7 +74,16 @@ public class UserService {
     }
 
 
-    public void deleteUserByCpf
+    public void deleteUserByCpf(String cpf){
+
+        User user = getAuthenticatedUser();
+        if(userRepository.findByCpf(user.getCpf()).isEmpty()){
+            throw new UserNoFoundException();
+        }
+
+        userRepository.deleteUserByCpf(cpf);
+
+    }
 
 
 }
