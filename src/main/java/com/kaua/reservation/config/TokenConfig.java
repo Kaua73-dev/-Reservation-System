@@ -43,7 +43,7 @@ public class TokenConfig {
     }
 
 
-    public String token(String token){
+    public String validatetoken(String token){
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
