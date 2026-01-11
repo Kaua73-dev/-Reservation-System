@@ -1,11 +1,14 @@
 package com.kaua.reservation.service;
 
 
+import com.kaua.reservation.dto.request.LoginRequest;
 import com.kaua.reservation.dto.request.RegisterRequest;
+import com.kaua.reservation.dto.response.Loginresponse;
 import com.kaua.reservation.dto.response.RegisterResponse;
 import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.entity.model.UserRepository;
 import com.kaua.reservation.exception.user.UserAlreadyExistException;
+import com.kaua.reservation.exception.user.UserNoFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +43,19 @@ public class UserService {
                 userSaved.getCpf(),
                 userSaved.getEmail()
         );
+
+    }
+
+
+    public Loginresponse login(LoginRequest request){
+        if (userRepository.findByCpf(request.cpf()).isEmpty()){
+            throw new UserNoFoundException();
+        }
+
+
+
+
+
 
     }
 
