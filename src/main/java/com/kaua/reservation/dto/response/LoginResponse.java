@@ -1,4 +1,4 @@
 package com.kaua.reservation.dto.response;
 
-public record Loginresponse(String token) {
+public record LoginResponse(String token) {
 }

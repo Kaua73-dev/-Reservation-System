@@ -4,10 +4,10 @@ package com.kaua.reservation.service;
 import com.kaua.reservation.config.TokenConfig;
 import com.kaua.reservation.dto.request.LoginRequest;
 import com.kaua.reservation.dto.request.RegisterRequest;
-import com.kaua.reservation.dto.response.Loginresponse;
+import com.kaua.reservation.dto.response.LoginResponse;
 import com.kaua.reservation.dto.response.RegisterResponse;
 import com.kaua.reservation.entity.model.User;
-import com.kaua.reservation.entity.model.UserRepository;
+import com.kaua.reservation.entity.repository.UserRepository;
 import com.kaua.reservation.exception.user.UserAlreadyExistException;
 import com.kaua.reservation.exception.user.UserNoFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -55,7 +55,7 @@ public class UserService {
     }
 
 
-    public Loginresponse login(LoginRequest request){
+    public LoginResponse login(LoginRequest request){
         if (userRepository.findByCpf(request.cpf()).isEmpty()){
             throw new UserNoFoundException();
         }
@@ -66,10 +66,7 @@ public class UserService {
         User user = (User) authentication.getPrincipal();
         String token = tokenConfig.generateToken(user);
 
-        return new Loginresponse(token);
-
-
-
+        return new LoginResponse(token);
 
     }
 

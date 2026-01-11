@@ -1,8 +1,7 @@
 package com.kaua.reservation.config;
 
 
-import com.kaua.reservation.entity.model.User;
-import com.kaua.reservation.entity.model.UserRepository;
+import com.kaua.reservation.entity.repository.UserRepository;
 import com.kaua.reservation.exception.user.UserNoFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,12 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Component
 public class SecurityFilterConfig extends OncePerRequestFilter {

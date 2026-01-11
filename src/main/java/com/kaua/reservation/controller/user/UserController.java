@@ -3,7 +3,7 @@ package com.kaua.reservation.controller.user;
 
 import com.kaua.reservation.dto.request.LoginRequest;
 import com.kaua.reservation.dto.request.RegisterRequest;
-import com.kaua.reservation.dto.response.Loginresponse;
+import com.kaua.reservation.dto.response.LoginResponse;
 import com.kaua.reservation.dto.response.RegisterResponse;
 import com.kaua.reservation.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Loginresponse> login(@Validated @RequestBody LoginRequest request){
+    public ResponseEntity<LoginResponse> login(@Validated @RequestBody LoginRequest request){
         return ResponseEntity.ok(userService.login(request));
     }
 
