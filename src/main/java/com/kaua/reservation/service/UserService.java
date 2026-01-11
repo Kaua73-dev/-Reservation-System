@@ -1,6 +1,7 @@
 package com.kaua.reservation.service;
 
 
+import com.kaua.reservation.config.TokenConfig;
 import com.kaua.reservation.dto.request.LoginRequest;
 import com.kaua.reservation.dto.request.RegisterRequest;
 import com.kaua.reservation.dto.response.Loginresponse;
@@ -9,6 +10,9 @@ import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.entity.model.UserRepository;
 import com.kaua.reservation.exception.user.UserAlreadyExistException;
 import com.kaua.reservation.exception.user.UserNoFoundException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +21,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final TokenConfig tokenConfig;
 
-    public UserService(UserRepository repository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(UserRepository repository, BCryptPasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenConfig tokenConfig) {
         this.userRepository = repository;
         this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.tokenConfig = tokenConfig;
     }
 
 
@@ -52,7 +60,13 @@ public class UserService {
             throw new UserNoFoundException();
         }
 
+        UsernamePasswordAuthenticationToken userAndPass = new UsernamePasswordAuthenticationToken(request.cpf(), request.password());
+        Authentication authentication = authenticationManager.authenticate(userAndPass);
 
+        User user = (User) authentication.getPrincipal();
+        String token = tokenConfig.generateToken(user);
+
+        return new Loginresponse(token);
 
 
 
