@@ -12,6 +12,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByCpf(String username);
 
+    void deleteUserByCpf(String cpf);
 
 
 }
