@@ -39,7 +39,6 @@ public class SecurityFilterConfig extends OncePerRequestFilter {
                     new UserNoFoundException()
                     );
 
-
         var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
