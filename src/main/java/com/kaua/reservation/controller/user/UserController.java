@@ -43,4 +43,9 @@ public class UserController {
         userService.deleteUserByCpf(cpf);
     }
 
+    @PutMapping("/user/{cpf}")
+    public RegisterResponse
+
+
+
 }
