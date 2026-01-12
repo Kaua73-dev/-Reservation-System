@@ -1,6 +1,8 @@
 package com.kaua.reservation.service;
 
 
+import com.kaua.reservation.dto.request.ResourceRequest;
+import com.kaua.reservation.dto.response.ResourceResponse;
 import com.kaua.reservation.entity.repository.ResourceRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,9 @@ public class ResourceService {
     }
 
 
+    public ResourceResponse createResource(ResourceRequest request){
 
+    }
 
 
 
