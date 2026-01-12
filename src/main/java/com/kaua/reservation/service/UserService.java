@@ -5,8 +5,10 @@ import com.kaua.reservation.auth.AuthVerifyService;
 import com.kaua.reservation.config.TokenConfig;
 import com.kaua.reservation.dto.request.LoginRequest;
 import com.kaua.reservation.dto.request.RegisterRequest;
+import com.kaua.reservation.dto.request.UserUpdateRequest;
 import com.kaua.reservation.dto.response.LoginResponse;
 import com.kaua.reservation.dto.response.RegisterResponse;
+import com.kaua.reservation.dto.response.UserUpdateResponse;
 import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.entity.repository.UserRepository;
 import com.kaua.reservation.exception.user.UserAlreadyExistException;
@@ -89,7 +91,7 @@ public class UserService extends AuthVerifyService{
 
 
     @Transactional
-    public RegisterResponse updateUserByCpf(String cpf, RegisterRequest request){
+    public UserUpdateResponse updateUserByCpf(String cpf, UserUpdateRequest request){
         User user = getAuthenticatedUser();
 
         if(user.getCpf().equals(cpf)){
@@ -115,7 +117,7 @@ public class UserService extends AuthVerifyService{
 
         userRepository.save(user);
 
-        return new RegisterResponse(
+        return new UserUpdateResponse(
                 user.getName(),
                 user.getCpf(),
                 user.getEmail()
