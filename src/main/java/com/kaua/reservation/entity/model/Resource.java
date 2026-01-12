@@ -17,12 +17,14 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name="name", nullable = false, length = 1000, unique = true)
     private String name;
 
+    @Column(name="category", nullable = false, length = 1000)
     private String category;
 
+    @Column(name="capacity", nullable = false)
     private int capacity;
-
 
     @Enumerated(EnumType.STRING)
     private ResourceStatus status;
