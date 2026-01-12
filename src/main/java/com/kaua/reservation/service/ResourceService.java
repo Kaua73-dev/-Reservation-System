@@ -24,7 +24,7 @@ public class ResourceService extends AuthVerifyService {
     public ResourceResponse createResource(ResourceRequest request, String name){
         User user = getAuthenticatedUser();
 
-        if(resourceRepository.findByName(user, name).isPresent()){
+        if(resourceRepository.findByUserAndName(user, name).isPresent()){
             throw new ResourceAlreadyExistException();
         }
 
