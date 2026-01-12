@@ -88,4 +88,39 @@ public class UserService extends AuthVerifyService{
     }
 
 
+    @Transactional
+    public RegisterResponse updateUserByCpf(String cpf, RegisterRequest request){
+        User user = getAuthenticatedUser();
+
+        if(user.getCpf().equals(cpf)){
+            throw new UserNoFoundException();
+        }
+
+        if(request.name() != null){
+            user.setName(request.name());
+        }
+
+        if(request.cpf() != null){
+            user.setCpf(request.cpf());
+        }
+
+        if(request.email() != null){
+            user.setEmail(request.email());
+        }
+
+        if(request.password() != null && !request.password().isBlank()){
+            user.setPassword(passwordEncoder.encode(request.password()));
+        }
+
+
+        userRepository.save(user);
+
+        return new RegisterResponse(
+                user.getName(),
+                user.getCpf(),
+                user.getEmail()
+        );
+
+    }
+
 }
