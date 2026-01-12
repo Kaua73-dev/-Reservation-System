@@ -26,9 +26,9 @@ public class ResourceController {
 
 
     @PostMapping("/resource")
-    public ResponseEntity<ResourceResponse> create(@Validated @RequestBody ResourceRequest request, User user){
+    public ResponseEntity<ResourceResponse> create(@Validated @RequestBody ResourceRequest request){
 
-        ResourceResponse response = resourceService.createResource(request, user);
+        ResourceResponse response = resourceService.createResource(request);
 
 
         return ResponseEntity

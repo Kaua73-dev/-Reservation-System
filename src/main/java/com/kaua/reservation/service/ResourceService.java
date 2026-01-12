@@ -21,7 +21,7 @@ public class ResourceService extends AuthVerifyService {
     }
 
 
-    public ResourceResponse createResource(ResourceRequest request, User user){
+    public ResourceResponse createResource(ResourceRequest request){
         User user = getAuthenticatedUser();
 
         if(resourceRepository.findByNameAndUser(request.name(), user).isPresent()){
