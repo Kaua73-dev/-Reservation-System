@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ResourceRepository extends JpaRepository<Resource, Integer> {
 
 
-    Optional<Resource> findByUserAndName(User user, String name);
+    Optional<Resource> findByNameAndUser(String name, User user);
 
 
 

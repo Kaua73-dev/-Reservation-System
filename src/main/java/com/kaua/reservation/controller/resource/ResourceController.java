@@ -2,9 +2,13 @@ package com.kaua.reservation.controller.resource;
 
 
 import com.kaua.reservation.dto.request.RegisterRequest;
+import com.kaua.reservation.dto.request.ResourceRequest;
 import com.kaua.reservation.dto.response.ResourceResponse;
-import com.kaua.reservation.entity.repository.ResourceRepository;
+import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.service.ResourceService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +26,15 @@ public class ResourceController {
 
 
     @PostMapping("/resource")
-    public ResourceResponse createResource(@RequestBody RegisterRequest request){
-        return
+    public ResponseEntity<ResourceResponse> create(@Validated @RequestBody ResourceRequest request, User user){
+
+        ResourceResponse response = resourceService.createResource(request, user);
+
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
+
     }
 
 

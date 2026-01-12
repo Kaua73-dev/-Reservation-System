@@ -21,10 +21,10 @@ public class ResourceService extends AuthVerifyService {
     }
 
 
-    public ResourceResponse createResource(ResourceRequest request, String name){
+    public ResourceResponse createResource(ResourceRequest request, User user){
         User user = getAuthenticatedUser();
 
-        if(resourceRepository.findByUserAndName(user, name).isPresent()){
+        if(resourceRepository.findByNameAndUser(request.name(), user).isPresent()){
             throw new ResourceAlreadyExistException();
         }
 
@@ -34,6 +34,7 @@ public class ResourceService extends AuthVerifyService {
         resource.setCategory(request.category());
         resource.setCapacity(request.capacity());
         resource.setStatus(request.status());
+        resource.setUser(user);
 
 
         resourceRepository.save(resource);
