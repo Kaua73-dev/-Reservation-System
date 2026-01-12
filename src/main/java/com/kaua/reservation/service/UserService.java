@@ -90,20 +90,13 @@ public class UserService extends AuthVerifyService{
     }
 
 
-    @Transactional
-    public UserUpdateResponse updateUserByCpf(String cpf, UserUpdateRequest request){
+    public UserUpdateResponse updateUserByCpf(UserUpdateRequest request){
         User user = getAuthenticatedUser();
 
-        if(user.getCpf().equals(cpf)){
-            throw new UserNoFoundException();
-        }
+
 
         if(request.name() != null){
             user.setName(request.name());
-        }
-
-        if(request.cpf() != null){
-            user.setCpf(request.cpf());
         }
 
         if(request.email() != null){

@@ -3,9 +3,10 @@ package com.kaua.reservation.controller.user;
 
 import com.kaua.reservation.dto.request.LoginRequest;
 import com.kaua.reservation.dto.request.RegisterRequest;
+import com.kaua.reservation.dto.request.UserUpdateRequest;
 import com.kaua.reservation.dto.response.LoginResponse;
 import com.kaua.reservation.dto.response.RegisterResponse;
-import com.kaua.reservation.entity.model.User;
+import com.kaua.reservation.dto.response.UserUpdateResponse;
 import com.kaua.reservation.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,10 @@ public class UserController {
         userService.deleteUserByCpf(cpf);
     }
 
-    @PutMapping("/user/{cpf}")
-    public RegisterResponse
+    @PutMapping("/user")
+    public UserUpdateResponse userUpdateByCpf(@RequestBody UserUpdateRequest request){
+        return userService.updateUserByCpf(request);
+    }
 
 
 
