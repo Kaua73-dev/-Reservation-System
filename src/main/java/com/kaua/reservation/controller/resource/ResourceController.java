@@ -1,8 +1,12 @@
 package com.kaua.reservation.controller.resource;
 
 
+import com.kaua.reservation.dto.request.RegisterRequest;
+import com.kaua.reservation.dto.response.ResourceResponse;
 import com.kaua.reservation.entity.repository.ResourceRepository;
+import com.kaua.reservation.service.ResourceService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,16 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class ResourceController {
 
-    private final ResourceRepository resourceRepository;
+   private final ResourceService resourceService;
 
-    public ResourceController(ResourceRepository resourceRepository) {
-        this.resourceRepository = resourceRepository;
+    public ResourceController(ResourceService resourceService) {
+        this.resourceService = resourceService;
     }
 
 
-
     @PostMapping("/resource")
-    public
+    public ResourceResponse createResource(@RequestBody RegisterRequest request){
+        return
+    }
 
 
 }
