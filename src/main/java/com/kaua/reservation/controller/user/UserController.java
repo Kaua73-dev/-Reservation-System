@@ -5,14 +5,12 @@ import com.kaua.reservation.dto.request.LoginRequest;
 import com.kaua.reservation.dto.request.RegisterRequest;
 import com.kaua.reservation.dto.response.LoginResponse;
 import com.kaua.reservation.dto.response.RegisterResponse;
+import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -38,6 +36,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Validated @RequestBody LoginRequest request){
         return ResponseEntity.ok(userService.login(request));
+    }
+
+    @DeleteMapping("/user/{cpf}")
+    public void deleteUserByCpf(@PathVariable String cpf){
+        userService.deleteUserByCpf(cpf);
     }
 
 }

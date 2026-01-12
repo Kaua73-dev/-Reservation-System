@@ -26,7 +26,7 @@ public class TokenConfig {
 
         try{
          String token = JWT.create()
-                 .withClaim("UserEmail", user.getEmail())
+                 .withClaim("UserName", user.getName())
                  .withSubject(user.getCpf())
                  .withExpiresAt(genExpiration())
                  .withIssuedAt(Instant.now())
