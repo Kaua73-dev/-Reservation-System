@@ -13,6 +13,7 @@ import com.kaua.reservation.exception.resource.ResourceAlreadyExistException;
 import com.kaua.reservation.exception.resource.ResourceNotFoundException;
 import com.kaua.reservation.exception.resource.ResourceVersionNotNullException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -115,6 +116,7 @@ public class ResourceService extends AuthVerifyService {
     }
 
 
+    @Transactional
     public void deleteResourceByName(String name){
         User user = getAuthenticatedUser();
 
