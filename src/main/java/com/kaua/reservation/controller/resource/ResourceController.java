@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -42,5 +43,10 @@ public class ResourceController {
         return resourceService.findAllResource();
     }
 
+
+    @GetMapping("resource/{name}")
+    public Optional<ResourceResponse> findResourceByName(@PathVariable String name){
+        return resourceService.getResourceByName(name);
+    }
 
 }
