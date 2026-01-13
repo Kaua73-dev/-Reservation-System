@@ -46,16 +46,16 @@ public class UserService extends AuthVerifyService{
 
         User user = new User();
         user.setName(request.name());
-        user.setCpf(request.cpf());
         user.setEmail(request.email());
+        user.setCpf(request.cpf());
         user.setPassword(passwordEncoder.encode(request.password()));
 
         User userSaved = userRepository.save(user);
 
         return new RegisterResponse(
                 userSaved.getName(),
-                userSaved.getCpf(),
-                userSaved.getEmail()
+                userSaved.getEmail(),
+                userSaved.getCpf()
         );
 
     }
