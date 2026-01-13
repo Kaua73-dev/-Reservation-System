@@ -10,11 +10,12 @@ import com.kaua.reservation.entity.repository.ResourceRepository;
 import com.kaua.reservation.exception.resource.ResourceAlreadyExistException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ResourceService extends AuthVerifyService {
 
     private final ResourceRepository resourceRepository;
-
 
     public ResourceService(ResourceRepository resourceRepository) {
         this.resourceRepository = resourceRepository;
@@ -51,8 +52,54 @@ public class ResourceService extends AuthVerifyService {
 
     }
 
+    public List<ResourceResponse> findAllResource(){
+        return resourceRepository.findAll()
+                .stream()
+                .map(resource -> new ResourceResponse(
+                        resource.getName(),
+                        resource.getCategory(),
+                        resource.getCapacity(),
+                        resource.getStatus(),
+                        resource.getVersion()
+                )).toList();
+    }
+
+
+    }
 
 
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
