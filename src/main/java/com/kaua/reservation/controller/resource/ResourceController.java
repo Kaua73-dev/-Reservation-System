@@ -4,7 +4,6 @@ package com.kaua.reservation.controller.resource;
 
 import com.kaua.reservation.dto.request.ResourceRequest;
 import com.kaua.reservation.dto.response.ResourceResponse;
-import com.kaua.reservation.entity.model.Resource;
 import com.kaua.reservation.service.ResourceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/auth")
