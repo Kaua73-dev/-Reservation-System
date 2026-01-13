@@ -21,6 +21,16 @@ public class ResourceService extends AuthVerifyService {
         this.resourceRepository = resourceRepository;
     }
 
+    private ResourceResponse toResponse(Resource r){
+        return new ResourceResponse(
+            r.getName(),
+            r.getCategory(),
+            r.getCapacity(),
+            r.getStatus(),
+            r.getVersion()
+        );
+    }
+
 
     public ResourceResponse createResource(ResourceRequest request){
         User user = getAuthenticatedUser();
