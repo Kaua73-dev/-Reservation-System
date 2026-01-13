@@ -75,6 +75,19 @@ public class ResourceService extends AuthVerifyService {
     }
 
 
+    public ResourceResponse updateResourceByName(ResourceRequest request, String name){
+
+        User user = getAuthenticatedUser();
+
+        Resource resource = resourceRepository.findByNameAndUser(name, user).orElseThrow(() ->
+                new ResourceNotFoundException()
+                );
+
+        if(!resource.getVersion().equals(request.))
+
+    }
+
+
 }
 
 
