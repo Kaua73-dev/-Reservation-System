@@ -45,7 +45,7 @@ public class ResourceController {
 
 
     @GetMapping("resource/{name}")
-    public Optional<ResourceResponse> findResourceByName(@PathVariable String name){
+    public List<ResourceResponse> findResourceByName(@PathVariable String name){
         return resourceService.getResourceByName(name);
     }
 

@@ -63,7 +63,7 @@ public class ResourceService extends AuthVerifyService {
                 .map(this::toResponse).toList();
     }
 
-    public Optional<ResourceResponse> getResourceByName(String name){
+    public List<ResourceResponse> getResourceByName(String name){
 
         if(resourceRepository.findByName(name).isEmpty()){
             throw new ResourceNotFoundException();
