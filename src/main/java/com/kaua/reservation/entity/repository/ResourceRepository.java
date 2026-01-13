@@ -18,5 +18,8 @@ public interface ResourceRepository extends JpaRepository<Resource, Integer> {
 
     List<ResourceResponse> findByName(String name);
 
+
+    void deleteByName(String name);
+
 }
 

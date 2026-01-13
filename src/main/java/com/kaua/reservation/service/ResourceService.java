@@ -115,6 +115,17 @@ public class ResourceService extends AuthVerifyService {
     }
 
 
+    public void deleteResourceByName(String name){
+        User user = getAuthenticatedUser();
+
+        if(resourceRepository.findByNameAndUser(name, user).isEmpty()){
+            throw new ResourceNotFoundException();
+        }
+
+        resourceRepository.deleteByName(name);
+    }
+
+
 }
 
 
