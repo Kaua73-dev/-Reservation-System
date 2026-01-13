@@ -3,12 +3,15 @@ package com.kaua.reservation.service;
 
 import com.kaua.reservation.auth.AuthVerifyService;
 import com.kaua.reservation.dto.request.ResourceRequest;
+import com.kaua.reservation.dto.request.ResourceUpdateRequest;
 import com.kaua.reservation.dto.response.ResourceResponse;
 import com.kaua.reservation.entity.model.Resource;
 import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.entity.repository.ResourceRepository;
+import com.kaua.reservation.exception.resource.OptimisticLockingException;
 import com.kaua.reservation.exception.resource.ResourceAlreadyExistException;
 import com.kaua.reservation.exception.resource.ResourceNotFoundException;
+import com.kaua.reservation.exception.resource.ResourceVersionNotNullException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -75,15 +78,39 @@ public class ResourceService extends AuthVerifyService {
     }
 
 
-    public ResourceResponse updateResourceByName(ResourceRequest request, String name){
+    public ResourceResponse updateResourceByName(ResourceUpdateRequest request, String name){
 
         User user = getAuthenticatedUser();
 
         Resource resource = resourceRepository.findByNameAndUser(name, user).orElseThrow(() ->
                 new ResourceNotFoundException()
                 );
+        if(request.version() == null){
+            throw new ResourceVersionNotNullException();
+        }
 
-        if(!resource.getVersion().equals(request.))
+        if(!resource.getVersion().equals(request.version())){
+            throw new OptimisticLockingException();
+        }
+
+        if(request.name() != null && !request.name().isBlank()){
+            resource.setName(request.name());
+        }
+
+        if(request.category() != null && !request.category().isBlank()){
+            resource.setCategory(request.category());
+        }
+
+        if(request.capacity() != null){
+            resource.setCapacity(request.capacity());
+        }
+
+        if(request.status() != null){
+            resource.setStatus(request.status());
+        }
+
+
+        return toResponse(resourceRepository.save(resource));
 
     }
 
