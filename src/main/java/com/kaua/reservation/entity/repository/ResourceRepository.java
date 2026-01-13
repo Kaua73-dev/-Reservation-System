@@ -16,6 +16,7 @@ public interface ResourceRepository extends JpaRepository<Resource, Integer> {
 
     Optional<Resource> findByNameAndUser(String name, User user);
 
+    Optional<ResourceResponse> findByName(String name);
 
 }
 

@@ -8,9 +8,11 @@ import com.kaua.reservation.entity.model.Resource;
 import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.entity.repository.ResourceRepository;
 import com.kaua.reservation.exception.resource.ResourceAlreadyExistException;
+import com.kaua.reservation.exception.resource.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResourceService extends AuthVerifyService {
@@ -61,8 +63,19 @@ public class ResourceService extends AuthVerifyService {
                 .map(this::toResponse).toList();
     }
 
+    public Optional<ResourceResponse> getResourceByName(String name){
+
+        if(resourceRepository.findByName(name).isEmpty()){
+            throw new ResourceNotFoundException();
+        }
+
+        return resourceRepository.findByName(name);
+
 
     }
+
+
+}
 
 
 
