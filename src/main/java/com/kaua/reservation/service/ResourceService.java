@@ -58,13 +58,7 @@ public class ResourceService extends AuthVerifyService {
     public List<ResourceResponse> findAllResource(){
         return resourceRepository.findAll()
                 .stream()
-                .map(resource -> new ResourceResponse(
-                        resource.getName(),
-                        resource.getCategory(),
-                        resource.getCapacity(),
-                        resource.getStatus(),
-                        resource.getVersion()
-                )).toList();
+                .map(this::toResponse).toList();
     }
 
 
