@@ -90,6 +90,7 @@ public class UserService extends AuthVerifyService{
     }
 
 
+    @Transactional
     public UserUpdateResponse updateUserByCpf(UserUpdateRequest request){
         User user = getAuthenticatedUser();
 

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ResourceService extends AuthVerifyService {
@@ -26,6 +26,7 @@ public class ResourceService extends AuthVerifyService {
     public ResourceService(ResourceRepository resourceRepository) {
         this.resourceRepository = resourceRepository;
     }
+
 
     private ResourceResponse toResponse(Resource r){
         return new ResourceResponse(
@@ -54,18 +55,20 @@ public class ResourceService extends AuthVerifyService {
         resource.setUser(user);
 
 
-       return toResponse(resourceRepository.save(resource));
+        return toResponse(resourceRepository.save(resource));
 
 
 
 
     }
+
 
     public List<ResourceResponse> findAllResource(){
         return resourceRepository.findAll()
                 .stream()
                 .map(this::toResponse).toList();
     }
+
 
     public List<ResourceResponse> getResourceByName(String name){
 
@@ -115,7 +118,6 @@ public class ResourceService extends AuthVerifyService {
         return toResponse(resourceRepository.save(resource));
 
     }
-
 
     @Transactional
     public void deleteResourceByName(String name){
