@@ -56,7 +56,10 @@ public class ResourceController {
     }
 
 
-
+    @DeleteMapping("/resource/{name}")
+    public void deleteResourceByName(@PathVariable String name){
+        resourceService.deleteResourceByName(name);
+    }
 
 
 }
