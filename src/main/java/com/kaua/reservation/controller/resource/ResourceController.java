@@ -1,10 +1,9 @@
 package com.kaua.reservation.controller.resource;
 
 
-import com.kaua.reservation.dto.request.RegisterRequest;
+
 import com.kaua.reservation.dto.request.ResourceRequest;
 import com.kaua.reservation.dto.response.ResourceResponse;
-import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.service.ResourceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,6 @@ public class ResourceController {
     public ResponseEntity<ResourceResponse> create(@Validated @RequestBody ResourceRequest request){
 
         ResourceResponse response = resourceService.createResource(request);
-
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

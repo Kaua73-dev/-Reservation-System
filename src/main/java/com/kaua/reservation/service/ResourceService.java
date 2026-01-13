@@ -42,9 +42,10 @@ public class ResourceService extends AuthVerifyService {
 
         return new ResourceResponse(
             resource.getName(),
-            request.category(),
-            request.capacity(),
-            request.status()
+            resource.getCategory(),
+            resource.getCapacity(),
+            resource.getStatus(),
+            resource.getVersion()
         );
 
 
