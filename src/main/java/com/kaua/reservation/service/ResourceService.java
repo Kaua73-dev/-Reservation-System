@@ -79,6 +79,7 @@ public class ResourceService extends AuthVerifyService {
     }
 
 
+    @Transactional
     public ResourceResponse updateResourceByName(ResourceUpdateRequest request, String name){
 
         User user = getAuthenticatedUser();
