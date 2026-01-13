@@ -94,13 +94,11 @@ public class UserService extends AuthVerifyService{
     public UserUpdateResponse updateUserByCpf(UserUpdateRequest request){
         User user = getAuthenticatedUser();
 
-
-
-        if(request.name() != null){
+        if(request.name() != null && !request.name().isBlank()){
             user.setName(request.name());
         }
 
-        if(request.email() != null){
+        if(request.email() != null && !request.email().isBlank()){
             user.setEmail(request.email());
         }
 
