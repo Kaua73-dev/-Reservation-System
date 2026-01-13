@@ -48,16 +48,9 @@ public class ResourceService extends AuthVerifyService {
         resource.setUser(user);
 
 
-        resourceRepository.save(resource);
+       return toResponse(resourceRepository.save(resource));
 
 
-        return new ResourceResponse(
-            resource.getName(),
-            resource.getCategory(),
-            resource.getCapacity(),
-            resource.getStatus(),
-            resource.getVersion()
-        );
 
 
     }
