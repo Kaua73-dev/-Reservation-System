@@ -26,6 +26,9 @@ public class Resource {
     @Column(name="capacity", nullable = false)
     private int capacity;
 
+    @Column(name="reservedCount", nullable = false)
+    private int reservedCount;
+
     @Enumerated(EnumType.STRING)
     private ResourceStatus status;
 

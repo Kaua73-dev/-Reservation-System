@@ -28,9 +28,9 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
-
     @Version
     private Long version;
+
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
