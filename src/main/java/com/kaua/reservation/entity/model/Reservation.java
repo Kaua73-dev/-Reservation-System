@@ -22,7 +22,7 @@ public class Reservation {
     @CreationTimestamp
     private LocalDateTime created_at;
 
-    @CreationTimestamp
+
     private LocalDateTime expires_at;
 
     @Version
