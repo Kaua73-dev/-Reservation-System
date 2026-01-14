@@ -64,10 +64,8 @@ public class ReservationService extends AuthVerifyService {
         reservation.setExpires_at(LocalDateTime.now().plusMinutes(15));
 
         resource.setReservedCount(resource.getReservedCount() + 1);
+        updateResourceAvailability(resource);
 
-        if(resource.getReservedCount() == resource.getCapacity()){
-            resource.setStatus(ResourceStatus.UNAVAILABLE);
-        }
 
         resourceRepository.save(resource);
         return toResponse(reservationRepository.save(reservation));
