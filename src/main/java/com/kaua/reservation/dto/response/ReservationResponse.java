@@ -4,5 +4,5 @@ import com.kaua.reservation.entity.enums.ReservationStatus;
 
 import java.time.LocalDateTime;
 
-public record ReservationResponse(LocalDateTime expires_at, ReservationStatus status) {
+public record ReservationResponse(LocalDateTime expires_at, ReservationStatus status, Integer id) {
 }
