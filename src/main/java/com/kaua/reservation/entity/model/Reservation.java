@@ -1,12 +1,12 @@
 package com.kaua.reservation.entity.model;
 
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,10 +18,21 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @CreationTimestamp
+    private LocalDateTime created_at;
 
+    @CreationTimestamp
+    private LocalDateTime expires_at;
 
+    @Version
+    private Long version;
 
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable = false)
+    private User user;
 
-
+    @ManyToOne
+    @JoinColumn(name="resource_id", nullable = false)
+    private Resource resource;
 
 }
