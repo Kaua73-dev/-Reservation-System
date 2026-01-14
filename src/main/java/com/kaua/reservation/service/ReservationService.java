@@ -15,6 +15,7 @@ import com.kaua.reservation.exception.reservation.ReservationFullException;
 import com.kaua.reservation.exception.resource.ResourceNotFoundException;
 import com.kaua.reservation.exception.user.UserNoFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -81,7 +82,8 @@ public class ReservationService extends AuthVerifyService {
         return toResponse(reservationRepository.save(reservation));
     }
 
-    public ReservationResponse confirmReservation(Integer reservationId){
+    @Transactional
+    public Reservation confirmReservation(Integer reservationId){
             User user = getAuthenticatedUser();
 
             Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(() ->
@@ -102,7 +104,7 @@ public class ReservationService extends AuthVerifyService {
             }
 
             reservation.setStatus(ReservationStatus.CONFIRMED);
-            reservationRepository.save(reservation);
+           return  reservationRepository.save(reservation);
 
     }
 
