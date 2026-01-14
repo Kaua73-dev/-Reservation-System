@@ -34,6 +34,16 @@ public class ReservationService extends AuthVerifyService {
         );
     }
 
+    private void updateResourceAvailability(Resource resource){
+        if(resource.getReservedCount() < resource.getCapacity()){
+            resource.setStatus(ResourceStatus.AVAILABLE);
+        } else{
+            resource.setStatus(ResourceStatus.UNAVAILABLE);
+        }
+
+    }
+
+
 
     public ReservationResponse createReservation(Integer resourceId){
         User user = getAuthenticatedUser();
@@ -62,6 +72,11 @@ public class ReservationService extends AuthVerifyService {
         resourceRepository.save(resource);
         return toResponse(reservationRepository.save(reservation));
     }
+
+    public ReservationResponse confirmRerservation(Integer resourceId){
+
+    }
+
 
 
 }
