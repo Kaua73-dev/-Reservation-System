@@ -31,9 +31,9 @@ public class ReservationController {
     }
 
 
-    @PostMapping("/reservation/{id}")
-    public Reservation confirmReservation(@PathVariable Integer id){
-        return reservationService.confirmReservation(id);
+    @PostMapping("/reservation/confirm/{reservationId}")
+    public ReservationResponse confirmReservation(@PathVariable Integer reservationId){
+        return reservationService.confirmReservation(reservationId);
     }
 
 }

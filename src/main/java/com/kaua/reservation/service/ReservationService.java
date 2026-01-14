@@ -84,7 +84,7 @@ public class ReservationService extends AuthVerifyService {
     }
 
     @Transactional
-    public Reservation confirmReservation(Integer reservationId){
+    public ReservationResponse confirmReservation(Integer reservationId){
             User user = getAuthenticatedUser();
 
             Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(() ->
@@ -104,8 +104,8 @@ public class ReservationService extends AuthVerifyService {
                 throw new ReservationExpiredException();
             }
 
-            reservation.setStatus(ReservationStatus.CONFIRMED);
-           return  reservationRepository.save(reservation);
+           reservation.setStatus(ReservationStatus.CONFIRMED);
+           return toResponse(reservationRepository.save(reservation));
 
     }
 
