@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public class ReservationService extends AuthVerifyService {
@@ -109,6 +110,14 @@ public class ReservationService extends AuthVerifyService {
 
     }
 
+    public List<ReservationResponse> getAllReservations(){
+        User user = getAuthenticatedUser();
+        return reservationRepository.findByUser(user)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+
+    }
 
 
 }

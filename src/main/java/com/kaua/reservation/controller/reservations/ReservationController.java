@@ -2,7 +2,6 @@ package com.kaua.reservation.controller.reservations;
 
 
 import com.kaua.reservation.dto.response.ReservationResponse;
-import com.kaua.reservation.entity.model.Reservation;
 import com.kaua.reservation.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
