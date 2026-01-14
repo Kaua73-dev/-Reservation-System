@@ -5,10 +5,9 @@ import com.kaua.reservation.dto.response.ReservationResponse;
 import com.kaua.reservation.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -34,5 +33,12 @@ public class ReservationController {
     public ReservationResponse confirmReservation(@PathVariable Integer reservationId){
         return reservationService.confirmReservation(reservationId);
     }
+
+
+    @GetMapping("/reservation")
+    public List<ReservationResponse> getAllReservationByUser(){
+        return reservationService.getAllReservations();
+    }
+
 
 }
