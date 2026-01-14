@@ -34,7 +34,8 @@ public class ReservationService extends AuthVerifyService {
     private ReservationResponse toResponse(Reservation r){
         return new ReservationResponse(
                 r.getExpires_at(),
-                r.getStatus()
+                r.getStatus(),
+                r.getId()
         );
     }
 
