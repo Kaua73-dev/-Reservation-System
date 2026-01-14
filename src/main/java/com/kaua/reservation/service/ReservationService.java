@@ -9,10 +9,8 @@ import com.kaua.reservation.entity.model.Resource;
 import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.entity.repository.ReservationRepository;
 import com.kaua.reservation.entity.repository.ResourceRepository;
-import com.kaua.reservation.exception.reservation.InvalidReservationStateException;
-import com.kaua.reservation.exception.reservation.ReservationExpiredException;
-import com.kaua.reservation.exception.reservation.ReservationFullException;
-import com.kaua.reservation.exception.reservation.ReservationNotFoundException;
+import com.kaua.reservation.exception.reservation.*;
+import com.kaua.reservation.exception.resource.ResourceAlreadyExistException;
 import com.kaua.reservation.exception.resource.ResourceNotFoundException;
 import com.kaua.reservation.exception.user.UserNoFoundException;
 import org.springframework.stereotype.Repository;
@@ -129,11 +127,16 @@ public class ReservationService extends AuthVerifyService {
                         );
 
         if(reservation.getStatus() == ReservationStatus.CANCELED){
-            throw new
+            throw new ReservationAlreadyCanceledException();
         }
 
 
         reservation.setStatus(ReservationStatus.CANCELED);
+        Resource resource = reservation.getResource();
+        updateResourceAvailability(resource);
+
+        reservationRepository.save(reservation);
+        resourceRepository.save(resource);
 
 
     }
