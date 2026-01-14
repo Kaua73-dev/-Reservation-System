@@ -40,5 +40,10 @@ public class ReservationController {
         return reservationService.getAllReservations();
     }
 
+    @DeleteMapping("/reservation/{reservationId}")
+    public void cancelReservationByUserAndId(Integer reservationId){
+        reservationService.cancelReservationById(reservationId);
+    }
+
 
 }

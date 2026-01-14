@@ -118,7 +118,8 @@ public class ReservationService extends AuthVerifyService {
 
     }
 
-    void cancelReservationById(Integer reservationId){
+
+    public void cancelReservationById(Integer reservationId){
         User user = getAuthenticatedUser();
 
         Reservation reservation = reservationRepository.findByIdAndUser(reservationId, user)
