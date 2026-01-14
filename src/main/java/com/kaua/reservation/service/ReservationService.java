@@ -10,6 +10,7 @@ import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.entity.repository.ReservationRepository;
 import com.kaua.reservation.entity.repository.ResourceRepository;
 import com.kaua.reservation.exception.reservation.ReservationFullException;
+import com.kaua.reservation.exception.resource.ResourceNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -34,8 +35,13 @@ public class ReservationService extends AuthVerifyService {
     }
 
 
-    public ReservationResponse createReservation(Resource resource){
+    public ReservationResponse createReservation(Integer resourceId){
         User user = getAuthenticatedUser();
+
+        Resource resource = resourceRepository.findById(resourceId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException()
+                        );
 
         if(resource.getReservedCount() >= resource.getCapacity()){
             throw new ReservationFullException();
@@ -46,6 +52,8 @@ public class ReservationService extends AuthVerifyService {
         reservation.setResource(resource);
         reservation.setStatus(ReservationStatus.RESERVED);
         reservation.setExpires_at(LocalDateTime.now().plusMinutes(15));
+
+        resource.setReservedCount(resource.getReservedCount() + 1);
 
         if(resource.getReservedCount() == resource.getCapacity()){
             resource.setStatus(ResourceStatus.UNAVAILABLE);
