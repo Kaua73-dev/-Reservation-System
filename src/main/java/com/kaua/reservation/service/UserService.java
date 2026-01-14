@@ -29,7 +29,6 @@ public class UserService extends AuthVerifyService{
     private final TokenConfig tokenConfig;
 
 
-
     public UserService(UserRepository repository, BCryptPasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenConfig tokenConfig) {
         this.userRepository = repository;
         this.passwordEncoder = passwordEncoder;
@@ -105,7 +104,6 @@ public class UserService extends AuthVerifyService{
         if(request.password() != null && !request.password().isBlank()){
             user.setPassword(passwordEncoder.encode(request.password()));
         }
-
 
         userRepository.save(user);
 
