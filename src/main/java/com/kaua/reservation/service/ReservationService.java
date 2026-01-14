@@ -10,6 +10,7 @@ import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.entity.repository.ReservationRepository;
 import com.kaua.reservation.entity.repository.ResourceRepository;
 import com.kaua.reservation.exception.reservation.InvalidReservationStateException;
+import com.kaua.reservation.exception.reservation.ReservationExpiredException;
 import com.kaua.reservation.exception.reservation.ReservationFullException;
 import com.kaua.reservation.exception.resource.ResourceNotFoundException;
 import com.kaua.reservation.exception.user.UserNoFoundException;
@@ -45,6 +46,13 @@ public class ReservationService extends AuthVerifyService {
 
     }
 
+    private void expireReservation(Reservation reservation){
+        reservation.setStatus(ReservationStatus.EXPIRED);
+
+        Resource resource = reservation.getResource();
+        resource.setReservedCount(resource.getReservedCount() - 1);
+        updateResourceAvailability(resource);
+    }
 
 
     public ReservationResponse createReservation(Integer resourceId){
@@ -88,7 +96,13 @@ public class ReservationService extends AuthVerifyService {
                 throw new InvalidReservationStateException();
             }
 
+            if(reservation.getExpires_at().isBefore(LocalDateTime.now())){
+                expireReservation(reservation);
+                throw new ReservationExpiredException();
+            }
 
+            reservation.setStatus(ReservationStatus.RESERVED);
+            reservationRepository.save(reservation);
 
     }
 
