@@ -34,7 +34,8 @@ public class ResourceService extends AuthVerifyService {
             r.getCategory(),
             r.getCapacity(),
             r.getStatus(),
-            r.getVersion()
+            r.getVersion(),
+            r.getId()
         );
     }
 
