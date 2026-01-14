@@ -101,7 +101,7 @@ public class ReservationService extends AuthVerifyService {
                 throw new ReservationExpiredException();
             }
 
-            reservation.setStatus(ReservationStatus.RESERVED);
+            reservation.setStatus(ReservationStatus.CONFIRMED);
             reservationRepository.save(reservation);
 
     }
