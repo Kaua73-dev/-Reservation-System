@@ -2,6 +2,7 @@ package com.kaua.reservation.controller.reservations;
 
 
 import com.kaua.reservation.dto.response.ReservationResponse;
+import com.kaua.reservation.entity.model.User;
 import com.kaua.reservation.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class ReservationController {
     }
 
     @DeleteMapping("/reservation/{reservationId}")
-    public void cancelReservationByUserAndId(Integer reservationId){
+    public void cancelReservationByUserAndId(@PathVariable Integer reservationId){
         reservationService.cancelReservationById(reservationId);
     }
 

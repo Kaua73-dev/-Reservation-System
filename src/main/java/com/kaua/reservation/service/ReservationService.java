@@ -119,6 +119,7 @@ public class ReservationService extends AuthVerifyService {
     }
 
 
+    @Transactional
     public void cancelReservationById(Integer reservationId){
         User user = getAuthenticatedUser();
 
