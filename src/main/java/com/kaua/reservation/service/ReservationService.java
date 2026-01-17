@@ -118,7 +118,6 @@ public class ReservationService extends AuthVerifyService {
 
     }
 
-
     @Transactional
     public void cancelReservationById(Integer reservationId){
         User user = getAuthenticatedUser();
@@ -126,7 +125,7 @@ public class ReservationService extends AuthVerifyService {
         Reservation reservation = reservationRepository.findByIdAndUser(reservationId, user)
                 .orElseThrow(() ->
                         new ReservationNotFoundException()
-                        );
+                );
 
         if(reservation.getStatus() == ReservationStatus.CANCELED){
             throw new ReservationAlreadyCanceledException();
