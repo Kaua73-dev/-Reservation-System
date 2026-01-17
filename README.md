@@ -1,4 +1,4 @@
-# Sistema de reservas 
+# Reservation system
 
 
 ### This system was developed and designed for applications that require some form of reservation, such as cinemas, restaurants, and hotels.
