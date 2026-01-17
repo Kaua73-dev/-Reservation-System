@@ -1,11 +1,11 @@
 # Sistema de reservas 
 
 
-### Esse sistema foi desenvolvido e pensado para aplicações que necessitam de alguma reserva, tais como cinemas, restaurantes, hoteis.
+### This system was developed and designed for applications that require some form of reservation, such as cinemas, restaurants, and hotels.
 
 
 
-## Tecnologias
+## Technologies
 - Java 17
 - Sprig boot
 - Spring Security
